@@ -72,6 +72,11 @@ public void setMemberDao (MemberDao memberDao) {
 }
 ```
 
+3. 생성자(?????)
+- 생성자에서도 @Autowired를 붙일 수 있는 것으로 알고 있고, 생성자 주입을 보다 권장하는 걸로 알고 있었는데
+- 책에서는 생성자 주입에 관한 내용이 나와있지 않다...?!?
+- [생성자 주입을 @Autowired를 사용하는 필드 주입보다 권장하는 하는 이유](https://madplay.github.io/post/why-constructor-injection-is-better-than-field-injection)
+
 ### 4.2.1 예외상황
 1. @Autowired 애노테이션을 적용한 대상에 일치하는 빈이 없는 경우
 > Exception in thread "main" org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'memberRegisterService': Unsatisfied dependency expressed through field 'memberDao': No qualifying bean of type 'chap04.spring.dao.MemberDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
@@ -193,3 +198,23 @@ public class MemberInfoPrinter {
   - 디버깅의 편의성을 위해 왠만하면 자동주입 기능 이용하기
   - 자동주입이 어려운 일부 케이스에만 수동주입 사용
   - 자동 주입, 수동 주입 코드 둘다 작성하지 않기
+
+
+# 정리!
+1. 자동 주입 시, 동일한 클래스의 빈 객체가 **두개 이상** 등록되어 있을 경우, 에러가 발생한다. 이때 해결방법은?
+2. 다음과 같이 부모와 자식 클래스가 모두 빈 객체로 등록된 경우, 에러가 발생한다. 이때 해결 방법 두가지?
+```java
+public class AppContext {
+    @Bean
+    public 부모클래스 빈객체_내놔_1() {...}
+    @Bean
+    public 자식클래스 빈객체_내놔_2() {...}
+}
+public class SomeClass {
+    @Autowired
+    private 부모클래스 gackChe;
+    ...
+}
+```
+3. @Autowired할 객체가 필수가 아닌 경우 코드 작성 방법 3가지? 각각의 특징 및 장단점
+4. 자동 주입 코드와 수동 주입 코드 모두 작성되어 있을 경우, 무엇이 우선 적용될까?
