@@ -42,7 +42,7 @@
 
 1. Bean으로 등록된 **Advisor들**을 스프링이 조회한다.
 2. Bean으로 등록된 객체들에 대해 Advisor 안의 **Pointcut**을 이용하여 공통 기능이 적용되는 객체인지 확인한다.
-3. 공통 기능이 적용되는 객체는 **Bean Post Processor (빈 후처리기)**를 통해 프록시 객체로 변환되어 Bean으로 등록된다.
+3. 공통 기능이 적용되는 객체는 **Bean Post Processor **빈 후처리기**를 통해 프록시 객체로 변환되어 Bean으로 등록된다.
 4. 따라서 프록시로 등록된 Bean을 사용하면 부가 기능까지 사용할 수 있게 된다!
 
 스프링은 Bean Post Processor를 이용하여 Pointcut에 맞는 Bean 객체를 프록시로 변환해준다!!
@@ -73,15 +73,15 @@ public class TransactionalAspect {
     @Around("@within(org.springframework.transaction.annotation.Transactional)")
     public Object transactional(ProceedingJoinPoint joinPoint) {
         ...
-        **트랜잭션.시작();**
+        트랜잭션.시작();
 
         ...        
 
-        **final Object result = joinPoint.proceed();**
+        final Object result = joinPoint.proceed();
 
         ...
         
-        **트랜잭션.종료();**
+        트랜잭션.종료();
         
         ...
     }
