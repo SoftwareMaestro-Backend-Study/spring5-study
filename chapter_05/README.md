@@ -63,7 +63,7 @@ public class MemberServiceImpl implements MemberService {
 - 빈 이름: (1) 클래스 명에서 맨 앞글자만 소문자로 변경 (2) 수동 지정
 
 <aside>
-💡 **@ComponentScan을 해주지 않아도 등록되었던 이유
+💡 **@ComponentScan을 해주지 않아도 등록되었던 이유**
 
 →** main 메소드에 @SpringbootApplication 어노테이션을 붙였기 때문이다.
 해당 어노테이션에 @ComponentScan이 포함되어있음을 확인할 수 있다.
