@@ -131,3 +131,89 @@ public @interface SpringBootApplication
 	💡 실제로 @ComponentScan에 직접 filter을 지정할 일은 거의 없다.
 
 </aside>
+
+**Example**
+
+```java
+@Configuration
+@ComponentScan(basePackages = {"spring"}, 
+	excludeFilters = @Filter(type = FilterType.REFEX, pattern = "spring\\..*Dao"))
+public class AppCtxWithExclude {
+}
+```
+
+- REGEX type으로 제외 대상을 지정한다.
+- “spring.”으로 시작하고 “Dao”로 끝나는 클래스들을 컴포넌트 스캔 대상에서 제외한다.
+
+```java
+@Configuration
+@ComponentScan(basePackages = {"spring"}, 
+	excludeFilters = @Filter(type = FilterType.ASPECTJ, pattern = "spring.*Dao" )			)
+public class AppCtxWithExclude {
+}
+```
+
+- spring 패키지의 Dao로 끝나는 타입을 컴포넌트 스캔 대상에서 제외한다.
+
+```java
+@Configuration
+@ComponentScan(basePackages = {"spring", "spring2" }, 
+	excludeFilters = { 
+			@Filter(type = FilterType.ANNOTATION, classes = {NoProduct.class, ManualBean.class} )			
+})
+public class AppCtxWithExclude {
+}
+```
+
+- @NoProduct, @ManualBean 어노테이션이 붙은 클래스를 컴포넌트 스캔 대상에서 제외한다.
+
+만약 2가지 이상의 filter type을 사용하고 싶다면, 여러 개의 @Filter 속성을 작성하면 된다!
+
+---
+
+## 4. 컴포넌트 스캔 충돌 처리
+
+컴포넌트 스캔 기능을 사용해서 자동으로 빈을 등록할 때는 충돌을 주의해야 한다.
+
+크게 (1) **빈 이름 충돌**과 (2) **수동 등록**에 따른 충돌이 발생할 수 있다.  
+
+<aside>
+💡 무슨 일이 있어도 특정 이름의 빈은 오직 1개만 등록되어야 한다.
+
+</aside>
+
+컴포넌트 스캔에서 같은 빈이 등록될 경우가 두 가지 존재한다
+
+1. 자동 빈 등록 & 자동 빈 등록
+2. 수동 빈 등록 & 자동 빈 등록
+
+**자동 빈 등록 & 자동 빈 등록** 
+
+이 경우 스프링에서 다음 Exception을 발생시킨다.
+
+```java
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [hello.core.AutoAppConfig]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'service' for bean class [hello.core.order.OrderServiceImpl] conflicts with existing, non-compatible bean definition of same name and class [hello.core.member.MemberServiceImpl]
+```
+
+**수동 빈 등록 & 자동 빈 등록**
+
+- **수동 빈 등록이 우선권을 가진다.**
+
+```java
+
+1. @ComponentScan으로 자동 등록되는 Bean
+@Component
+public class MemoryMemberRepository implements MemberRepository{
+}
+
+2. 수동 등록 Bean - 설정 파일에@Bean으로 등록 
+public class AutoAppConfig {
+
+    @Bean(name = "memoryMemberRepository")
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+}
+```
+
+→ **memoryMemberRepository** 타입의 Bean은 오직 **AutoAppConfig**에서 정의한 Bean 한 개만 존재한다!
