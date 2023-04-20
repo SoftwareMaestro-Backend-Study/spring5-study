@@ -31,6 +31,7 @@
 |------------|----------|---------|
 |어정윤|3|[스프링 DI](chapter_03/README.md)|
 |조윤호|4|[의존 자동 주입](chapter_04/README.md)|
+|박찬호|5|[컴포넌트 스캔](chapter_05/README.md)|
 |강민성|6|[빈 라이프사이클과 스코프](chapter_06/README.md)|
 |박성우|7|[AOP](chapter_07/README.md)|
 <!-- 
