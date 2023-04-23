@@ -7,7 +7,8 @@
 
 ## 1. 스프링 MVC 핵심 구성 요소
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6654bcbb-0a1c-4820-b5fa-fafd4dddc529/Untitled.png)
+![image](https://user-images.githubusercontent.com/83508073/233844723-76e19126-7bff-43a5-94b1-52802387eff1.png)
+
 
 1. 요청 전송
 2. 요청 URL과 매칭되는 핸들러(컨트롤러)를 **HandlerMapping**에서 검색
@@ -26,6 +27,4 @@
     - 요청 처리 결과가 ModelAndView 타입이라면, **DispatcherServlet**은 결과를 보여줄 뷰를 찾기 위해서 **ViewResolver** 빈 객체를 호출한다.
 
 > Q. HandlerAdapter의 존재 이유 (+ “ControllerMapping”이 아닌 “HandlerMapping”인 이유)
-
-Ans:  @Controller 뿐만 아니라 Controller 인터페이스, HttpRequestHandler 인터페이스로 만들어진 handler들도 함께 처리할 수 있도록 설계되었기 때문이다.
->
+> Ans:  @Controller 뿐만 아니라 Controller 인터페이스, HttpRequestHandler 인터페이스로 만들어진 handler들도 함께 처리할 수 있도록 설계되었기 때문이다.
