@@ -34,6 +34,7 @@
 |박찬호|5|[컴포넌트 스캔](chapter_05/README.md)|
 |강민성|6|[빈 라이프사이클과 스코프](chapter_06/README.md)|
 |박성우|7|[AOP](chapter_07/README.md)|
+|박성우|17|[프로필과 프로파일](chapter_17/README.md)|
 <!-- 
   멘토링 정리 처럼 폴더에 파일 저장하고 
   챕터 순서대로  
