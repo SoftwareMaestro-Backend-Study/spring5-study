@@ -37,6 +37,7 @@
 |어정윤|8|[DB 연동](chapter_08/README.md)|
 |박찬호|10|[Spring MVC 동작 방식](chapter_10/README.md)|
 |강민성|11|[MVC 1: 요청 매핑, 커맨드 객체, 라다이렉트, 폼 태그, 모델](chapter_11/README.md)|
+|어정윤|13|[MVC 3: 세션, 인터셉터, 쿠키](chapter_13/README.md)|
 |강민성|16|[JSON 응답과 요청 처리](chapter_16/README.md)|
 |박성우|17|[프로필과 프로파일](chapter_17/README.md)|
 <!-- 
